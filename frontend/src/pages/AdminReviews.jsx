@@ -32,7 +32,7 @@ export default function AdminReviews() {
             user.image && user.image.trim() !== ""
               ? user.image.startsWith("http")
                 ? user.image
-                : `http://localhost:5000/uploads/${user.image}`
+                : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/uploads/${user.image}`
               : null;
 
           return (

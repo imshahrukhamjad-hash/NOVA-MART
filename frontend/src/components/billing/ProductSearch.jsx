@@ -120,7 +120,7 @@ export default function ProductSearch({ filteredProducts, searchInput, setSearch
             {filteredProducts.map((p) => {
               const img = p.image || p.images?.[0] || null;
               const imageUrl = img
-                ? (typeof img === 'string' && (img.startsWith('http') || img.startsWith('//') || img.startsWith('/')) ? img : `http://localhost:5000/uploads/${img}`)
+                ? (typeof img === 'string' && (img.startsWith('http') || img.startsWith('//') || img.startsWith('/')) ? img : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/uploads/${img}`)
                 : null;
               
               return (

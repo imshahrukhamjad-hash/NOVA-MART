@@ -7,7 +7,7 @@ export default function ProductCard({ product, onAdd, imageClass, layout = 'hori
   const img = product.image || product.images?.[0] || null;
   // If image is a filename (no protocol or leading slash), assume backend uploads folder
   const imageUrl = img
-    ? (typeof img === 'string' && (img.startsWith('http') || img.startsWith('//') || img.startsWith('/')) ? img : `http://localhost:5000/uploads/${img}`)
+    ? (typeof img === 'string' && (img.startsWith('http') || img.startsWith('//') || img.startsWith('/')) ? img : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/uploads/${img}`)
     : null;
 
   const subtitle = product.color ? `COLOR: ${product.color}` : (product.subtitle || product.variant || product.description?.slice(0, 60));

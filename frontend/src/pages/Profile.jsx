@@ -31,7 +31,7 @@ export default function Profile() {
         phone: res.data.phone || "",
       });
       if (res.data.image) {
-        setPreview(`http://localhost:5000/uploads/${res.data.image}`);
+        setPreview(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/uploads/${res.data.image}`);
         setImageLoaded(true);
       }
     });
@@ -52,7 +52,7 @@ export default function Profile() {
     try {
       const res = await axios.put("/auth/upload-image", fd);
       setUser(p => ({ ...p, image: res.data.image }));
-      setPreview(`http://localhost:5000/uploads/${res.data.image}`);
+      setPreview(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/uploads/${res.data.image}`);
       setImageLoaded(true);
       setImage(null);
       toast.success("Profile photo updated");

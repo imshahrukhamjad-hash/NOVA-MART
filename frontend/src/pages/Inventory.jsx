@@ -228,7 +228,7 @@ export default function Inventory() {
             <div key={p._id} className="bg-neutral-900 border border-neutral-800 rounded-2xl p-4 flex flex-col">
               {p.image && (
                 <img
-                  src={`http://localhost:5000/uploads/${p.image}`}
+                  src={`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/uploads/${p.image}`}
                   alt={p.name}
                   className="w-full h-40 rounded-lg object-cover mb-3"
                   onError={(e) => e.currentTarget.style.display = 'none'}
@@ -254,7 +254,7 @@ export default function Inventory() {
               <div className="flex gap-3">
                 {p.image && (
                   <img
-                    src={`http://localhost:5000/uploads/${p.image}`}
+                    src={`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/uploads/${p.image}`}
                     alt={p.name}
                     className="w-20 h-20 rounded-lg object-cover"
                     onError={(e) => e.currentTarget.style.display = 'none'}
@@ -308,7 +308,7 @@ export default function Inventory() {
                       {imageFile ? (
                         <img src={URL.createObjectURL(imageFile)} alt="preview" className="w-full h-full object-cover" />
                       ) : editingProduct?.image ? (
-                        <img src={`http://localhost:5000/uploads/${editingProduct.image}`} alt="preview" className="w-full h-full object-cover" />
+                        <img src={`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/uploads/${editingProduct.image}`} alt="preview" className="w-full h-full object-cover" />
                       ) : (
                         <div className="text-neutral-400 text-sm text-center px-2">
                           <div className="font-medium">Drop image here</div>

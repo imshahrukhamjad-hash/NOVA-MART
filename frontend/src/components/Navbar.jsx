@@ -167,7 +167,7 @@ export default function Navbar() {
                       <div className="space-y-2 max-h-64 overflow-y-auto">
                         {cartItems.map(item => (
                           <div key={item._id} className="flex items-center gap-3">
-                            <img src={item.image ? (item.image.startsWith('http')||item.image.startsWith('/')?item.image:`http://localhost:5000/uploads/${item.image}`) : 'https://via.placeholder.com/40'} alt={item.name} className="w-10 h-10 object-cover rounded" />
+                            <img src={item.image ? (item.image.startsWith('http')||item.image.startsWith('/')?item.image:`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/uploads/${item.image}`) : 'https://via.placeholder.com/40'} alt={item.name} className="w-10 h-10 object-cover rounded" />
                             <div className="flex-1 text-sm">
                               <div className={theme === 'dark' ? 'text-white' : 'text-gray-900'}>{item.name}</div>
                               <div className={`text-xs ${theme === 'dark' ? 'text-neutral-400' : 'text-gray-500'}`}>Qty: {item.quantity} • Rs {item.price}</div>
@@ -227,7 +227,7 @@ export default function Navbar() {
                 <img
                   src={
                     user?.image
-                      ? `http://localhost:5000/uploads/${user.image}`
+                      ? `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/uploads/${user.image}`
                       : "https://via.placeholder.com/40"
                   }
                   className="w-8 h-8 rounded-full object-cover"
