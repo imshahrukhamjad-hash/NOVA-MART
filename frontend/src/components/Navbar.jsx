@@ -104,6 +104,7 @@ export default function Navbar() {
 
 
   const logout = async () => {
+    localStorage.removeItem("token");
     await axios.post("/auth/logout");
     navigate('/');
   };

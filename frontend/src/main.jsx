@@ -10,6 +10,16 @@ import "./styles/ui-tweaks.css";
 axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 axios.defaults.withCredentials = true;
 
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <App />

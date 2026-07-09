@@ -51,7 +51,10 @@ export default function Login() {
     }
 
     try {
-      await axios.post("/auth/login", { email, password });
+      const res = await axios.post("/auth/login", { email, password });
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+      }
       toast.success("Login successful");
       navigate("/dashboard");
     } catch (err) {

@@ -47,7 +47,7 @@ router.post("/login", async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
-    res.json({ role: user.role, message: "Login successful" });
+    res.json({ token, role: user.role, message: "Login successful" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
