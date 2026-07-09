@@ -1,0 +1,142 @@
+/* Global UI tweaks to make the app more compact */
+
+/* Reduce base font size (affects rem-based Tailwind utilities) */
+html {
+  font-size: 14px; /* default 16px -> smaller UI */
+}
+
+/* Limit SVG icon sizes to keep them compact across the app */
+svg {
+  max-width: 18px;
+  max-height: 18px;
+}
+
+/* Slightly tighter button paddings and smaller fonts */
+button {
+  padding-top: 0.45rem;
+  padding-bottom: 0.45rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 0.95rem;
+}
+
+input[type="text"], input[type="number"], select, textarea {
+  font-size: 0.95rem;
+}
+
+/* Reduce large preset widths used for inputs */
+input[disabled].w-64, .w-64 {
+  max-width: 16rem; /* shrinks w-64 a bit where applied */
+}
+
+/* Reduce some large cards / sidebar width if not overridden */
+.sidebar-compact {
+  width: 14rem; /* 224px */
+}
+
+/* Make modal headers a little smaller */
+.modal-title { font-size: 1rem; }
+
+/* Utility to make specific SVGs a bit larger if necessary */
+svg.icon-lg { max-width: 20px; max-height: 20px; }
+
+/* Modern professional theme variables */
+:root {
+  --bg: #0b1220; /* deep neutral */
+  --surface: #0f1724; /* card surface */
+  --muted: #94a3b8; /* muted text */
+  --accent: #f59e0b; /* amber */
+  --accent-2: #10b981; /* green */
+  --card-radius: 12px;
+  --focus-ring: 0 0 0 4px rgba(245,158,11,0.12);
+}
+
+/* Reusable card utility */
+.card {
+  background: var(--surface);
+  border-radius: var(--card-radius);
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 6px 18px rgba(2,6,23,0.45);
+}
+
+/* Button utilities */
+.btn { padding: .5rem .9rem; border-radius: 10px; font-weight: 600; }
+.btn-primary { background: linear-gradient(90deg,var(--accent),#d97706); color: white; box-shadow: 0 6px 18px rgba(249,115,22,0.12); }
+.btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.06); color: var(--muted); }
+.btn-secondary { background: rgba(255,255,255,0.03); color: var(--muted); }
+
+/* Modern form inputs */
+.modern-input { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); color: white; padding: .55rem .75rem; border-radius: 10px; }
+.modern-input:focus { outline: none; box-shadow: var(--focus-ring); border-color: var(--accent); }
+
+/* Product card specifics */
+.product-card { display: flex; flex-direction: column; justify-content: space-between; }
+.product-card-img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; margin-bottom: .5rem; }
+
+/* Floating total bar styling */
+.floating-total { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.04); }
+.floating-total .btn { min-width: 140px; }
+
+/* Accessibility helpers */
+.sr-only { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
+
+/* Enhanced select dropdown styling for theme consistency */
+select.modern-input { -webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 2.5rem; }
+select.modern-input::-ms-expand { display: none; }
+select.modern-input option { background: var(--surface); color: white; }
+
+/* Billing layout and checkout sidebar */
+.billing-grid { display: grid; grid-template-columns: 1fr 380px; gap: 1.5rem; align-items: start; }
+.billing-main { min-height: 480px; }
+.billing-sidebar { width: 100%; }
+.checkout-card { background: var(--surface); border-radius: var(--card-radius); border: 1px solid rgba(255,255,255,0.04); }
+.invoice-header { border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 0.75rem; margin-bottom: 0.75rem; }
+.invoice-header .invoice-id { font-family: monospace; font-weight: 700; letter-spacing: 0.6px; }
+
+/* Compact table for history views */
+.compact-table th, .compact-table td { padding: 10px 12px; font-size: 0.95rem; border-color: rgba(255,255,255,0.04); }
+
+@media (max-width: 900px) {
+  .billing-grid { grid-template-columns: 1fr; }
+}
+
+/* Checkout / quick-pay */
+.checkout-sticky { position: sticky; top: 1.5rem; }
+.btn-quick { padding: .5rem .7rem; border-radius: 10px; font-weight: 700; font-size: .95rem; }
+.btn-quick-cash { background: linear-gradient(90deg,var(--accent),#d97706); color: white; }
+.btn-quick-jazz { background: linear-gradient(90deg,#10b981,#059669); color: white; }
+.btn-quick-stripe { background: linear-gradient(90deg,#3b82f6,#2563eb); color: white; }
+
+
+
+/* Custom scrollbar utility — use on scrollable containers to match project theme */
+.scrollbar-custom {
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(245,158,11,0.95) rgba(255,255,255,0.02);
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+.scrollbar-custom::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.02);
+  border-radius: 10px;
+}
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(245,158,11,0.95), rgba(217,119,6,0.95));
+  border-radius: 10px;
+  border: 2px solid rgba(0,0,0,0.12);
+}
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  filter: brightness(0.92);
+}
+
+/* Apply a subtle default for the page scrollbar */
+body {
+  scrollbar-color: rgba(245,158,11,0.9) rgba(255,255,255,0.02);
+}
+
+

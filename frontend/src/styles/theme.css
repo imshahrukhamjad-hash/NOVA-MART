@@ -1,0 +1,189 @@
+/* Global Theme Variables */
+:root[data-theme='dark'],
+:root {
+  /* Background Colors */
+  --bg-primary: rgb(23, 23, 23);
+  --bg-secondary: rgb(38, 38, 38);
+  --bg-tertiary: rgb(64, 64, 64);
+  --bg-hover: rgb(31, 31, 31);
+  --bg-950: rgb(12, 12, 12);
+
+  /* Text Colors */
+  --text-primary: rgb(255, 255, 255);
+  --text-secondary: rgb(212, 212, 212);
+  --text-tertiary: rgb(161, 161, 161);
+  --text-muted: rgb(115, 115, 115);
+
+  /* Border Colors */
+  --border-primary: rgb(38, 38, 38);
+  --border-secondary: rgb(64, 64, 64);
+}
+
+:root[data-theme='light'] {
+  /* Background Colors */
+  --bg-primary: rgb(255, 255, 255);
+  --bg-secondary: rgb(245, 245, 245);
+  --bg-tertiary: rgb(229, 231, 235);
+  --bg-hover: rgb(243, 244, 246);
+  --bg-950: rgb(248, 249, 250);
+
+  /* Text Colors */
+  --text-primary: rgb(17, 24, 39);
+  --text-secondary: rgb(31, 41, 55);
+  --text-tertiary: rgb(75, 85, 99);
+  --text-muted: rgb(107, 114, 128);
+
+  /* Border Colors */
+  --border-primary: rgb(229, 231, 235);
+  --border-secondary: rgb(209, 213, 219);
+}
+
+body {
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark-themed classes mapping */
+:root[data-theme='light'] .bg-neutral-950 {
+  background-color: rgb(248, 249, 250);
+}
+
+:root[data-theme='light'] .bg-neutral-900 {
+  background-color: rgb(245, 245, 245);
+}
+
+:root[data-theme='light'] .bg-neutral-800 {
+  background-color: rgb(240, 240, 240);
+}
+
+:root[data-theme='light'] .bg-neutral-700 {
+  background-color: rgb(230, 230, 230);
+}
+
+:root[data-theme='light'] .border-neutral-900 {
+  border-color: rgb(229, 231, 235);
+}
+
+:root[data-theme='light'] .border-neutral-800 {
+  border-color: rgb(229, 231, 235);
+}
+
+:root[data-theme='light'] .border-neutral-700 {
+  border-color: rgb(209, 213, 219);
+}
+
+:root[data-theme='light'] .text-white {
+  color: rgb(17, 24, 39);
+}
+
+:root[data-theme='light'] .text-gray-200 {
+  color: rgb(55, 65, 81);
+}
+
+:root[data-theme='light'] .text-gray-300 {
+  color: rgb(75, 85, 99);
+}
+
+:root[data-theme='light'] .text-gray-400 {
+  color: rgb(107, 114, 128);
+}
+
+:root[data-theme='light'] .text-neutral-400 {
+  color: rgb(107, 114, 128);
+}
+
+:root[data-theme='light'] .text-neutral-300 {
+  color: rgb(75, 85, 99);
+}
+
+:root[data-theme='light'] .text-neutral-200 {
+  color: rgb(55, 65, 81);
+}
+
+:root[data-theme='light'] .hover\:bg-neutral-900:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+:root[data-theme='light'] .hover\:bg-neutral-800:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+/* Utility Classes for Theme Support */
+.theme-bg-primary {
+  background-color: var(--bg-primary);
+}
+
+.theme-bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.theme-bg-tertiary {
+  background-color: var(--bg-tertiary);
+}
+
+.theme-bg-hover {
+  background-color: var(--bg-hover);
+}
+
+.theme-text-primary {
+  color: var(--text-primary);
+}
+
+.theme-text-secondary {
+  color: var(--text-secondary);
+}
+
+.theme-text-tertiary {
+  color: var(--text-tertiary);
+}
+
+.theme-text-muted {
+  color: var(--text-muted);
+}
+
+.theme-border-primary {
+  border-color: var(--border-primary);
+}
+
+.theme-border-secondary {
+  border-color: var(--border-secondary);
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Toast Notification Theme Styles */
+.custom-toast {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  border-radius: 8px;
+  font-family: inherit;
+  padding: 12px 20px;
+  min-width: 220px;
+  max-width: 350px;
+}
+
+.custom-toast-success {
+  border-left: 5px solid #22c55e;
+}
+.custom-toast-error {
+  border-left: 5px solid #ef4444;
+}
+.custom-toast-info {
+  border-left: 5px solid #3b82f6;
+}
+.custom-toast-loading {
+  border-left: 5px solid #eab308;
+}
+
+/* Light theme overrides for toast */
+:root[data-theme='light'] .custom-toast {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+}
