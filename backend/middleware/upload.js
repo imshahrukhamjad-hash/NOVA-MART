@@ -1,10 +1,12 @@
 const multer = require("multer");
 const path = require("path");
+const os = require("os");
 
 // storage config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads");
+    const dest = process.env.NODE_ENV === "production" ? os.tmpdir() : "uploads";
+    cb(null, dest);
   },
   filename: (req, file, cb) => {
     cb(

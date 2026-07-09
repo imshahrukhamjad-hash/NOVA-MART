@@ -4,7 +4,8 @@ const productController = require("../controllers/productController");
 const auth = require("../middleware/authMiddleware");
 const admin = require("../middleware/adminMiddleware");
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const os = require("os");
+const upload = multer({ dest: process.env.NODE_ENV === "production" ? os.tmpdir() : "uploads/" });
 
 // Public: list active products
 router.get("/", productController.listProducts);
