@@ -102,7 +102,7 @@ export default function ProductSearch({ filteredProducts, searchInput, setSearch
         </div>
       </div>
 
-      <div className="max-h-[60vh] overflow-y-auto scrollbar-custom">
+      <div className="lg:max-h-[60vh] overflow-y-auto scrollbar-custom">
         {filteredProducts.length === 0 ? (
           <div className={`text-center py-8 ${
             theme === 'dark' ? 'text-neutral-400' : 'text-gray-600'
@@ -116,7 +116,7 @@ export default function ProductSearch({ filteredProducts, searchInput, setSearch
             }`}>Reload</button>
           </div>
         ) : viewLayout === 'grid' ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {filteredProducts.map((p) => (
               <ProductCard key={p._id} product={p} onAdd={() => onAdd(p)} layout="vertical" />
             ))}

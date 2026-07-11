@@ -89,7 +89,7 @@ export default function Dashboard() {
   }, [role]);
 
   return (
-    <div className={`flex h-screen overflow-hidden ${theme === 'dark' ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
+    <div className={`flex h-screen overflow-auto md:overflow-hidden ${theme === 'dark' ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
 
       {/* Mobile backdrop overlay — clicking it closes sidebar */}
       {sidebarOpen && (
@@ -160,7 +160,7 @@ export default function Dashboard() {
         </div>
 
         {/* Page content */}
-        <div className="relative z-10 p-4 md:p-6 overflow-auto h-[calc(100vh-56px)]">
+        <div className="relative z-10 p-3 md:p-6 overflow-auto h-auto md:h-[calc(100vh-56px)]">
           <Routes location={location}>
             <Route index element={<DashboardPage />} />
             <Route path="overview" element={<DashboardPage />} />

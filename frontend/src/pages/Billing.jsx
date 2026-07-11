@@ -1025,7 +1025,7 @@ export default function Billing() {
   };
 
   return (
-    <div className={`max-w-7xl mx-auto p-6 min-h-screen pb-32 ${
+    <div className={`max-w-7xl mx-auto px-3 py-3 md:px-6 md:py-6 min-h-screen pb-32 ${
       theme === 'dark' ? 'bg-neutral-900' : 'bg-gray-50'
     }`}>
 
@@ -1173,7 +1173,7 @@ export default function Billing() {
         </div>
       ) : (
         <>
-          <div className="billing-grid grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div className="billing-grid grid grid-cols-1 lg:grid-cols-12 gap-4">
             <div className="billing-main lg:col-span-7">
               {/* Left: Products */}
               <ProductSearch
@@ -1188,7 +1188,7 @@ export default function Billing() {
             </div>
 
             {/* Middle: Cart */}
-            <div className={`rounded-2xl p-5 flex flex-col lg:col-span-3 ${
+            <div className={`rounded-2xl p-3 md:p-5 flex flex-col lg:col-span-3 ${
               theme === 'dark'
                 ? 'bg-neutral-800 border border-neutral-700'
                 : 'bg-white border border-gray-200'
