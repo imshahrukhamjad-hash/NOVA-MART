@@ -18,6 +18,7 @@ import Particles from "react-tsparticles";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useTheme } from "../context/ThemeContext";
+import { FiMenu } from "react-icons/fi";
 
 export default function Dashboard() {
   const location = useLocation();
@@ -25,6 +26,7 @@ export default function Dashboard() {
   const [showMailModal, setShowMailModal] = useState(false);
   const [showMailboxModal, setShowMailboxModal] = useState(false);
   const [role, setRole] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const fetchRole = async () => {
@@ -38,11 +40,15 @@ export default function Dashboard() {
     fetchRole();
   }, []);
 
+  // Close sidebar on route change (mobile UX)
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [location.pathname]);
+
   useEffect(() => {
     // Control Tawk.to widget visibility based on role
     const controlTawkWidget = () => {
       if (role === "user") {
-        // Load Tawk script if not loaded
         if (!window.Tawk_API) {
           window.Tawk_API = window.Tawk_API || {};
           window.Tawk_LoadStart = new Date();
@@ -58,13 +64,11 @@ export default function Dashboard() {
             }
           };
         } else {
-          // If already loaded, show it
           if (typeof window.Tawk_API.showWidget === 'function') {
             window.Tawk_API.showWidget();
           }
         }
       } else {
-        // Hide if loaded
         if (window.Tawk_API && typeof window.Tawk_API.hideWidget === 'function') {
           window.Tawk_API.hideWidget();
         }
@@ -73,10 +77,6 @@ export default function Dashboard() {
 
     controlTawkWidget();
 
-    // Check immediately
-    controlTawkWidget();
-
-    // Also check after Tawk loads
     if (!window.Tawk_API) {
       const checkTawk = setInterval(() => {
         if (window.Tawk_API) {
@@ -84,18 +84,31 @@ export default function Dashboard() {
           clearInterval(checkTawk);
         }
       }, 1000);
-      setTimeout(() => clearInterval(checkTawk), 10000); // Stop checking after 10s
+      setTimeout(() => clearInterval(checkTawk), 10000);
     }
   }, [role]);
 
   return (
     <div className={`flex h-screen overflow-hidden ${theme === 'dark' ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
-      <Sidebar 
+
+      {/* Mobile backdrop overlay — clicking it closes sidebar */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/60 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <Sidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
         onOpenMailModal={() => setShowMailModal(true)}
         onOpenMailboxModal={() => setShowMailboxModal(true)}
       />
 
-      <div className="flex-1 relative overflow-hidden">
+      {/* Main content area */}
+      <div className="flex-1 relative overflow-hidden min-w-0">
         {/* Particles Background */}
         <Particles
           className="absolute inset-0"
@@ -125,11 +138,29 @@ export default function Dashboard() {
           }}
         />
 
-        {/* Navbar */}
-        <Navbar />
+        {/* Top bar: hamburger (mobile) + Navbar */}
+        <div className="relative z-20 flex items-center">
+          {/* Hamburger button — visible on mobile only */}
+          <button
+            onClick={() => setSidebarOpen(true)}
+            aria-label="Open sidebar"
+            className={`md:hidden flex-shrink-0 p-3 m-1 rounded-lg transition ${
+              theme === 'dark'
+                ? 'text-white hover:bg-neutral-800'
+                : 'text-gray-900 hover:bg-gray-200'
+            }`}
+          >
+            <FiMenu size={22} />
+          </button>
 
-        {/* Main Content */}
-        <div className="relative z-10 p-6 overflow-auto h-[calc(100vh-64px)]">
+          {/* Navbar stretches to fill remaining space */}
+          <div className="flex-1 min-w-0">
+            <Navbar />
+          </div>
+        </div>
+
+        {/* Page content */}
+        <div className="relative z-10 p-4 md:p-6 overflow-auto h-[calc(100vh-56px)]">
           <Routes location={location}>
             <Route index element={<DashboardPage />} />
             <Route path="overview" element={<DashboardPage />} />
@@ -147,7 +178,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* MODALS */}
+      {/* Modals */}
       <MailModal isOpen={showMailModal} onClose={() => setShowMailModal(false)} />
       <MailboxModal isOpen={showMailboxModal} onClose={() => setShowMailboxModal(false)} />
 
