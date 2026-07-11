@@ -1193,17 +1193,17 @@ export default function Billing() {
                 ? 'bg-neutral-800 border border-neutral-700'
                 : 'bg-white border border-gray-200'
             }`}>
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
                 <h3 className={`text-lg font-semibold ${
                   theme === 'dark' ? 'text-white' : 'text-gray-900'
                 }`}>Cart</h3>
-                <div className="flex items-center gap-2">
-                  <input value={customerQuery} onChange={(e)=>setCustomerQuery(e.target.value)} className={`w-48 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 border ${
+                <div className="flex items-center gap-2 w-full sm:w-auto">
+                  <input value={customerQuery} onChange={(e)=>setCustomerQuery(e.target.value)} className={`w-full sm:w-48 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 border ${
                     theme === 'dark'
                       ? 'bg-neutral-700 border-neutral-600 text-white placeholder-neutral-400'
                       : 'bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-500'
                   }`} placeholder="Search customer..." aria-label="Search customers" />
-                  <button onClick={saveRecentCustomer} className={`px-3 py-2 rounded-lg font-medium transition ${
+                  <button onClick={saveRecentCustomer} className={`px-3 py-2 rounded-lg font-medium transition shrink-0 ${
                     theme === 'dark'
                       ? 'bg-neutral-700 hover:bg-neutral-600 text-white'
                       : 'bg-gray-200 hover:bg-gray-300 text-gray-900'

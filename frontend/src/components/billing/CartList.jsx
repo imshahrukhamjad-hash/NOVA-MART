@@ -118,13 +118,15 @@ export default function CartList({
 
         <div className="mt-3">
           <label className={`block text-sm mb-1 ${theme === 'dark' ? 'text-neutral-400' : 'text-gray-700'}`}>Payment Method</label>
-          <div className="flex items-center gap-2">
-            <button onClick={() => setPaymentMethod('cash')} className={`px-3 py-1.5 rounded-lg font-medium transition ${paymentMethod === 'cash' ? 'bg-amber-600 text-white' : theme === 'dark' ? 'bg-neutral-700 text-neutral-400 hover:bg-neutral-600' : 'bg-gray-200 text-gray-900 hover:bg-gray-300'}`}>Cash</button>
-            <button onClick={() => setPaymentMethod('jazzcash')} className={`px-3 py-1.5 rounded-lg font-medium transition ${paymentMethod === 'jazzcash' ? 'bg-amber-600 text-white' : theme === 'dark' ? 'bg-neutral-700 text-neutral-400 hover:bg-neutral-600' : 'bg-gray-200 text-gray-900 hover:bg-gray-300'}`}>JazzCash</button>
-            <button onClick={() => setPaymentMethod('stripe')} className={`px-3 py-1.5 rounded-lg font-medium transition ${paymentMethod === 'stripe' ? 'bg-amber-600 text-white' : theme === 'dark' ? 'bg-neutral-700 text-neutral-400 hover:bg-neutral-600' : 'bg-gray-200 text-gray-900 hover:bg-gray-300'}`}>Stripe</button>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+            <div className="flex gap-2 flex-wrap">
+              <button onClick={() => setPaymentMethod('cash')} className={`px-3 py-1.5 rounded-lg font-medium transition ${paymentMethod === 'cash' ? 'bg-amber-600 text-white' : theme === 'dark' ? 'bg-neutral-700 text-neutral-400 hover:bg-neutral-600' : 'bg-gray-200 text-gray-900 hover:bg-gray-300'}`}>Cash</button>
+              <button onClick={() => setPaymentMethod('jazzcash')} className={`px-3 py-1.5 rounded-lg font-medium transition ${paymentMethod === 'jazzcash' ? 'bg-amber-600 text-white' : theme === 'dark' ? 'bg-neutral-700 text-neutral-400 hover:bg-neutral-600' : 'bg-gray-200 text-gray-900 hover:bg-gray-300'}`}>JazzCash</button>
+              <button onClick={() => setPaymentMethod('stripe')} className={`px-3 py-1.5 rounded-lg font-medium transition ${paymentMethod === 'stripe' ? 'bg-amber-600 text-white' : theme === 'dark' ? 'bg-neutral-700 text-neutral-400 hover:bg-neutral-600' : 'bg-gray-200 text-gray-900 hover:bg-gray-300'}`}>Stripe</button>
+            </div>
 
             {paymentMethod === 'jazzcash' && (
-              <div className="ml-auto w-64">
+              <div className="w-full sm:w-64 sm:ml-auto mt-2 sm:mt-0">
                 <label className={`block text-xs mb-1 ${theme === 'dark' ? 'text-neutral-400' : 'text-gray-700'}`}>JazzCash Number</label>
                 <input
                   aria-label="JazzCash number"
@@ -161,30 +163,30 @@ export default function CartList({
             const lineTotal = Math.round(unitPrice * item.quantity);
 
             return (
-              <div key={item._id} className={`flex items-center justify-between p-3 rounded-lg mb-2 hover:shadow-md transition border ${
+              <div key={item._id} className={`flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-lg mb-2 hover:shadow-md transition border gap-3 ${
                 theme === 'dark'
                   ? 'bg-neutral-900/20 border-neutral-800'
                   : 'bg-gray-50 border-gray-200'
               }`}>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 w-full sm:w-auto">
                   {imageUrl ? (
-                    <img src={imageUrl} alt={item.name} className="w-12 h-12 object-cover rounded" onError={(e)=>{e.target.style.display='none';}} />
+                    <img src={imageUrl} alt={item.name} className="w-12 h-12 object-cover rounded shrink-0" onError={(e)=>{e.target.style.display='none';}} />
                   ) : (
-                    <div className={`w-12 h-12 rounded flex items-center justify-center ${
+                    <div className={`w-12 h-12 rounded flex items-center justify-center shrink-0 ${
                       theme === 'dark'
                         ? 'bg-neutral-800 text-neutral-400'
                         : 'bg-gray-300 text-gray-500'
                     }`}>🧾</div>
                   )}
 
-                  <div>
-                    <div className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{item.name}</div>
+                  <div className="min-w-0 flex-1">
+                    <div className={`font-semibold truncate ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{item.name}</div>
                     <div className={`text-xs ${theme === 'dark' ? 'text-neutral-400' : 'text-gray-600'}`}>Unit: RS {item.price} · {maxQty} in stock</div>
                     <div className={`text-xs ${theme === 'dark' ? 'text-neutral-400' : 'text-gray-600'}`}>After discount: RS {unitPrice}</div>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center justify-between sm:justify-end gap-3 w-full sm:w-auto border-t sm:border-t-0 pt-2 sm:pt-0">
                   <div className={`flex items-center rounded overflow-hidden border ${
                     theme === 'dark'
                       ? 'border-neutral-800'
@@ -199,20 +201,23 @@ export default function CartList({
                     </button>
                   </div>
 
-                  <div className="flex flex-col items-center mr-2">
+                  <div className="flex flex-col items-center">
                     <label className={`text-xs mb-1 ${theme === 'dark' ? 'text-neutral-400' : 'text-gray-700'}`}>Discount</label>
-                    <input aria-label={`Discount for ${item.name}`} type="number" className={`w-24 px-2 py-1 rounded border text-center ${
+                    <input aria-label={`Discount for ${item.name}`} type="number" className={`w-20 px-2 py-1 rounded border text-center ${
                       theme === 'dark'
                         ? 'bg-neutral-700 border-neutral-600 text-white'
                         : 'bg-gray-100 border-gray-300 text-gray-900'
                     }`} value={discountAmt} onChange={(e) => setItemDiscount(item._id, Number(e.target.value) || 0)} />
                   </div>
 
-                  <div className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>RS {lineTotal}</div>
+                  <div className="flex flex-col items-end sm:items-center min-w-[70px]">
+                    <span className={`text-xs ${theme === 'dark' ? 'text-neutral-400' : 'text-gray-700'}`}>Total</span>
+                    <div className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>RS {lineTotal}</div>
+                  </div>
 
                   <button
                     onClick={() => removeFromCart(item._id)}
-                    className={`ml-3 px-3 py-1 rounded text-rose-400 hover:text-white transition ${
+                    className={`px-2 py-1 rounded text-rose-400 hover:text-white transition ${
                       theme === 'dark'
                         ? 'hover:bg-neutral-800'
                         : 'hover:bg-gray-200'
