@@ -125,12 +125,12 @@ export default function Navbar() {
           sticky top-0 z-50 transition-colors duration-300`}
         >
           {/* Navbar Title */}
-          <h1 className="text-base font-semibold tracking-wide">
+          <h1 className="text-xs sm:text-base font-semibold tracking-wide truncate max-w-[100px] sm:max-w-none">
             Welcome{user?.name ? ', ' : ''}{user?.name}
           </h1>
 
           {/* Search + Profile */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             {/* Cart button */}
             <div className="relative">
               <div className="relative" ref={cartRef}>

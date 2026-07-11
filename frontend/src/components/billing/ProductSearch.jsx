@@ -14,20 +14,20 @@ export default function ProductSearch({ filteredProducts, searchInput, setSearch
         ? 'bg-neutral-800 border-neutral-700'
         : 'bg-white border-gray-200 shadow-lg'
     }`}>
-      <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
+      <div className="space-y-3 mb-4">
         <input
           type="text"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           placeholder="Search products..."
-          className={`w-full sm:flex-1 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 border ${
+          className={`w-full px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 border ${
             theme === 'dark'
               ? 'bg-neutral-700 border-neutral-600 text-white placeholder-neutral-400'
               : 'bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-500'
           }`}
         />
-        <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-          <div className="relative flex-1 sm:flex-initial min-w-[140px]">
+        <div className="flex items-center justify-between sm:justify-start gap-3 w-full">
+          <div className="relative flex-1 sm:flex-initial sm:min-w-[160px]">
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
@@ -46,57 +46,59 @@ export default function ProductSearch({ filteredProducts, searchInput, setSearch
             }`} />
           </div>
           
-          <div className="flex items-center gap-2 border rounded-lg p-1" style={{
-            borderColor: theme === 'dark' ? '#404854' : '#e5e7eb'
-          }}>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 border rounded-lg p-1" style={{
+              borderColor: theme === 'dark' ? '#404854' : '#e5e7eb'
+            }}>
+              <button
+                onClick={() => setViewLayout('grid')}
+                className={`p-1.5 rounded transition ${
+                  viewLayout === 'grid'
+                    ? theme === 'dark'
+                      ? 'bg-neutral-700 text-white'
+                      : 'bg-gray-200 text-gray-900'
+                    : theme === 'dark'
+                      ? 'text-neutral-400 hover:text-white'
+                      : 'text-gray-600 hover:text-gray-900'
+                }`}
+                title="Grid view"
+              >
+                <FiGrid size={16} />
+              </button>
+              <button
+                onClick={() => setViewLayout('list')}
+                className={`p-1.5 rounded transition ${
+                  viewLayout === 'list'
+                    ? theme === 'dark'
+                      ? 'bg-neutral-700 text-white'
+                      : 'bg-gray-200 text-gray-900'
+                    : theme === 'dark'
+                      ? 'text-neutral-400 hover:text-white'
+                      : 'text-gray-600 hover:text-gray-900'
+                }`}
+                title="List view"
+              >
+                <FiList size={16} />
+              </button>
+            </div>
+            
             <button
-              onClick={() => setViewLayout('grid')}
-              className={`p-2 rounded transition ${
-                viewLayout === 'grid'
-                  ? theme === 'dark'
-                    ? 'bg-neutral-700 text-white'
-                    : 'bg-gray-200 text-gray-900'
-                  : theme === 'dark'
-                    ? 'text-neutral-400 hover:text-white'
-                    : 'text-gray-600 hover:text-gray-900'
-              }`}
-              title="Grid view"
+              onClick={async () => {
+                setIsRefreshing(true);
+                await fetchProducts();
+                setIsRefreshing(false);
+              }}
+              className={`px-3 py-2 rounded-lg font-medium transition ${
+                theme === 'dark'
+                  ? 'bg-neutral-700 hover:bg-neutral-600 text-white'
+                  : 'bg-gray-200 hover:bg-gray-300 text-gray-900'
+              } ${isRefreshing ? 'animate-spin' : ''}`}
+              title="Refresh"
+              disabled={isRefreshing}
             >
-              <FiGrid size={18} />
-            </button>
-            <button
-              onClick={() => setViewLayout('list')}
-              className={`p-2 rounded transition ${
-                viewLayout === 'list'
-                  ? theme === 'dark'
-                    ? 'bg-neutral-700 text-white'
-                    : 'bg-gray-200 text-gray-900'
-                  : theme === 'dark'
-                    ? 'text-neutral-400 hover:text-white'
-                    : 'text-gray-600 hover:text-gray-900'
-              }`}
-              title="List view"
-            >
-              <FiList size={18} />
+              ⟳
             </button>
           </div>
-          
-          <button
-            onClick={async () => {
-              setIsRefreshing(true);
-              await fetchProducts();
-              setIsRefreshing(false);
-            }}
-            className={`px-3 py-2 rounded-lg font-medium transition ${
-              theme === 'dark'
-                ? 'bg-neutral-700 hover:bg-neutral-600 text-white'
-                : 'bg-gray-200 hover:bg-gray-300 text-gray-900'
-            } ${isRefreshing ? 'animate-spin' : ''}`}
-            title="Refresh"
-            disabled={isRefreshing}
-          >
-            ⟳
-          </button>
         </div>
       </div>
 
